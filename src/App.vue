@@ -10,6 +10,9 @@
 import AppHeader from './components/AppHeader.vue'
 import AppFooter from './components/AppFooter.vue';
 
+import todo from "./utilities/todo";
+todo.on();
+
 export default {
 	name: "App",
 	components: { AppHeader, AppFooter },
@@ -17,7 +20,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../style/_imports.scss';
+@import './style/imports.scss';
 * {
 	margin: 0;
 	padding: 0;

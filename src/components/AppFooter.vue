@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import AssetCart from "./AssetCart.vue";
+import AssetCart from "./assets/AssetCart.vue";
 import AppFooterForm from "./AppFooterForm.vue";
 export default {
 	data() {
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../style/_imports.scss';
+@import "../style/imports.scss";
 footer {
 	background-color: $primary;
 	display: flex;
@@ -36,6 +36,7 @@ footer {
 	justify-content: center;
 	align-items: center;
 	padding: 1rem;
+	gap: 1rem;
 	> button {
 		position: relative;
 		width: 4rem;
