@@ -21,9 +21,6 @@ describe("Testing TODO", () => {
 	it("Try to set TODO to on using on method.", () => {
 		todo.on();
 		expect(todo.todo).toBe(true);
-		console.log = jest.fn();
-		todo.log("test");
-		expect(console.log).toHaveBeenCalledWith("TODO", "test");
 	});
 
 	it("Try to toggle TODO using toggle method.", () => {
