@@ -1,21 +1,23 @@
 
 <template>
-	<AppHeader />
+	<AppHeader text="Shopping" />
 	<main>Main</main>
-	<footer>Footer</footer>
+	<AppFooter />
 </template>
 
 <script>
 
 import AppHeader from './components/AppHeader.vue'
+import AppFooter from './components/AppFooter.vue';
 
 export default {
 	name: "App",
-	components: {AppHeader},
+	components: { AppHeader, AppFooter },
 };
 </script>
 
-<style>
+<style lang="scss">
+@import '../style/_imports.scss';
 * {
 	margin: 0;
 	padding: 0;
