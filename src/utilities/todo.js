@@ -1,49 +1,122 @@
 import typeCheck from "./typeCheck";
 
 //@ts-check
-/**Todo logger if #todo is true */
+/**Todo logger*/
 class Todo {
-	#todo;
-	/**
-	 * Create instance of Todo with #todo set to true or false.
-	 * @param {Boolean} bool - Set state of #todo.
-	 */
+	#debug;
+	#todoList = [];
+	#iterator = 0;
 	constructor(bool = false) {
 		typeCheck(arguments, [Boolean(), undefined]);
-		this.#todo = bool;
+		this.#debug = bool;
 	}
-	get todo() {
-		return this.#todo;
+	get debug() {
+		return this.#debug;
+	}
+	get length() {
+		return this.#todoList.length;
+	}
+	clear() {
+		this.#todoList.length = 0;
 	}
 	/**
-	 * Console.log a message if #todo is true.
-	 * @param  {...any} msg - Message to log out.
+	 * Add a todo to the #todoList,
+	 * @param  {...any} what - Message to log.
 	 */
-	log(...msg) {
-		if (this.#todo) {
-			console.log("TODO", ...msg);
+	add(...what) {
+		if (
+			!this.#todoList.some((todo) => {
+				return JSON.stringify(todo.what) === JSON.stringify(what);
+			})
+		) {
+			const stack = Array.from(new Error().stack.split("\n")).map((item) => (item = item.trim()));
+			const [, , thirdLine] = stack;
+			const from = thirdLine.substring(thirdLine.indexOf("(") + 1, thirdLine.length - 1);
+			this.#todoList.push({
+				from: from,
+				what: [...what],
+			});
+			if (this.#debug) {
+				this.last();
+			}
 		}
 	}
 	/**
-	 * Change state of #todo to true.
+	 * Get first entry in #todoList
+	 */
+	last() {
+		const length = this.#todoList.length;
+		const { from, what } = this.#todoList[length - 1];
+		const object = {
+			number: length,
+			from: from,
+			what: what,
+		};
+		this.#print(object);
+	}
+	/**
+	 * Get last entry in #todoList
+	 */
+	first() {
+		const index = 0;
+		const { from, what } = this.#todoList[index];
+		const object = {
+			number: index + 1,
+			from: from,
+			what: what,
+		};
+		this.#print(object);
+	}
+	#print(object) {
+		const { number, from, what } = object;
+		console.log(`${number ? `#${number}\n` : ""}WHERE\n\t${from}\nWHAT\n\t${what.join("\n\t")}`);
+	}
+	list() {
+		console.log("TODO\n----");
+		for (const [index, todo] of this.#todoList.entries()) {
+			const { from, what } = todo;
+			const object = {
+				number: index + 1,
+				from: from,
+				what: what,
+			};
+			this.#print(object);
+		}
+	}
+	next() {
+		const { from, what } = this.#todoList[this.#iterator]
+			? this.#todoList[this.#iterator++]
+			: (() => {
+					this.#iterator = 0;
+					return this.#todoList[this.#iterator++];
+			})();
+		const object = {
+			number: this.#iterator,
+			from: from,
+			what: what,
+		};
+		this.#print(object);
+	}
+	/**
+	 * Change state of #debug to true.
 	 */
 	on() {
-		this.#todo = true;
+		this.#debug = true;
 		console.log("TODO is ON");
 	}
 	/**
-	 * Change state of #todo to false.
+	 * Change state of #debug to false.
 	 */
 	off() {
-		this.#todo = false;
+		this.#debug = false;
 		console.log("TODO is OFF");
 	}
 	/**
-	 * Toggle #todo between true and false.
+	 * Toggle #debug between true and false.
 	 */
 	toggle() {
-		this.#todo = !this.#todo;
-		console.log(`TODO is ${this.#todo ? "ON" : "OFF"}`);
+		this.#debug = !this.#debug;
+		console.log(`TODO is ${this.#debug ? "ON" : "OFF"}`);
 	}
 }
 export default new Todo();

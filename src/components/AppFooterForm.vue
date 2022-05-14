@@ -23,13 +23,13 @@ export default {
 				if (!element.value) {
 					return element.focus();
 				} else if (key === "name") {
-					todo.log("check if item is already in list");
+					todo.add("check if item is already in list");
 				}
 			}
-			const product = {
+			/* const product = {
 				[this.$refs.name.value]: this.$refs.amount.value,
-			};
-			todo.log("add item to shoppinglist", product);
+			}; */
+			todo.add("add item to shoppinglist");
 			this.reset();
 		},
 		reset() {
