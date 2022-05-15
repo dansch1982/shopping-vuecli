@@ -29,19 +29,21 @@
 		</g>
 	</svg>
 </template>
-<style scoped>
-.st0 {
-	fill: none;
-	stroke-width: 30;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-	stroke-miterlimit: 10;
-}
-.st1 {
-	fill: none;
-	stroke-width: 15;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-	stroke-miterlimit: 10;
+<style lang="scss" scoped>
+svg {
+	.st0 {
+		fill: none;
+		stroke-width: 30;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke-miterlimit: 10;
+	}
+	.st1 {
+		fill: none;
+		stroke-width: 15;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke-miterlimit: 10;
+	}
 }
 </style>

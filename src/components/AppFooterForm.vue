@@ -42,14 +42,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../style/imports.scss";
+@import "../style/imports";
 section {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	max-width: 600px;
 	gap: 1rem;
 	.inputs {
 		display: flex;
@@ -69,14 +68,7 @@ section {
 	}
 	.buttons {
 		button {
-			border: none;
-			outline: none;
-			padding: 0.5rem 1rem;
-			background-color: $cta;
-			color: $background;
-			&:hover {
-				cursor: pointer;
-			}
+			@include button;
 		}
 	}
 }

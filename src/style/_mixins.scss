@@ -1,5 +1,25 @@
 @mixin input {
-    outline: none;
-    border: none;
-    padding: 0.5rem 1rem;
+	outline: none;
+	border: none;
+	padding: 0.5rem 1rem;
+}
+@mixin button {
+	border: none;
+	outline: none;
+	padding: 0.5rem 1rem;
+	color: $background;
+	background-color: $cta;
+	transition: 0.2s;
+	&:hover {
+		cursor: pointer;
+		background-color: darken($cta, 5%);
+	}
+}
+@mixin container {
+	max-width: $maxWidth;
+	width: 100%;
+    height: 100%;
+	display: flex;
+	margin: auto;
+	padding: 1rem;
 }
