@@ -1,0 +1,17 @@
+$transition: "0.5s";
+.scale-1 {
+	transition: $transition;
+	transform: scale3d(1, 1, 1);
+}
+.scale-0 {
+	transition: $transition;
+	transform: scale3d(0, 0, 0);
+}
+.opacity-1 {
+	transition: $transition;
+	opacity: 1;
+}
+.opacity-0 {
+	transition: $transition;
+	opacity: 0;
+}
