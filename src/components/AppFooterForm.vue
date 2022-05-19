@@ -1,8 +1,8 @@
 <template>
 	<section>
 		<section class="inputs">
-			<input type="text" placeholder="Product name." @keypress.enter="submit" ref="name" />
-			<input type="number" min="1" @keypress.enter="submit" ref="amount" />
+			<input type="text" placeholder="Item name" @keypress.enter="submit" @keypress="cleanInput($event)" v-model="name" ref="name" desc="name" />
+			<input type="number" min="1" @keypress.enter="submit" v-model="amount" ref="amount" desc="amount" />
 		</section>
 		<section class="buttons">
 			<button @click="submit">Add</button>
@@ -11,30 +11,39 @@
 </template>
 
 <script>
-import todo from "../utilities/todo";
+import { items, cleanInput, formatInput } from "@/exports";
 export default {
+	data() {
+		return {
+			cleanInput: cleanInput,
+			name: null,
+			amount: 1,
+		};
+	},
 	mounted() {
 		this.reset();
 	},
 	methods: {
 		submit() {
-			for (const key in this.$refs) {
-				const element = this.$refs[key];
-				if (!element.value) {
-					return element.focus();
-				} else if (key === "name") {
-					todo.add("check if item is already in list");
+			const { name, amount } = this.$data;
+			const refs = Object.values(this.$refs);
+			for (const ref of refs) {
+				if (!ref.value) {
+					ref.focus();
+					return console.log(ref.getAttribute("desc"), "is missing.");
 				}
 			}
-			/* const product = {
-				[this.$refs.name.value]: this.$refs.amount.value,
-			}; */
-			todo.add("add item to shoppinglist");
-			this.reset();
+			const object = {
+				name: formatInput(name),
+				amount: parseInt(amount),
+			};
+			items.addItem(object, () => {
+				this.reset();
+			});
 		},
 		reset() {
-			this.$refs.name.value = null;
-			this.$refs.amount.value = 1;
+			this.name = null;
+			this.amount = 1;
 			this.$refs.name.focus();
 		},
 	},
@@ -42,7 +51,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../style/imports";
+@import "@/style/imports";
 section {
 	display: flex;
 	flex-direction: column;

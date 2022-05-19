@@ -1,14 +1,14 @@
 <template>
-	<section v-if="!edit" class="container">
+	<section v-if="!edit" class="container" ref="container">
 		<article class="product" @click="remove">
-			<article class="checkbox"><article class="checkmark scale-0 opacity-0"></article></article>
-			<span v-if="product[1] > 1" class="span">{{ product[1] }}st</span>
-			<span class="span">{{ product[0] }}</span>
+			<article class="checkbox"><article class="checkmark scale-0 opacity-0" ref="checkmark"></article></article>
+			<span v-if="item[1] > 1" class="span">{{ item[1] }}st</span>
+			<span class="span">{{ item[0] }}</span>
 		</article>
 
 		<article class="buttons">
 			<button class="button" @click.stop="toggleEdit" ref="update">
-				<img src="../assets/edit.svg" alt="" />
+				<img src="@/assets/edit.svg" alt="" />
 			</button>
 		</article>
 	</section>
@@ -44,10 +44,25 @@ export default {
 	},
 	methods: {
 		remove() {
-			console.log("remove");
+			const container = this.$refs.container;
+			const checkmark = this.$refs.checkmark;
+			checkmark.classList.remove("opacity-0", "scale-0");
+			checkmark.classList.add("opacity-1", "scale-1");
+			checkmark.addEventListener(
+				"transitionend",
+				() => {
+					container.classList.add("opacity-0");
+					container.addEventListener("transitionend", (event) => {
+						if (event.target === container) {
+							this.$emit("removeItem", this.item)
+						}
+					});
+				},
+				{ once: true }
+			);
 		},
 		reset() {
-			const [name, amount] = this.product;
+			const [name, amount] = this.item;
 			this.name = name;
 			this.amount = amount;
 		},
@@ -59,18 +74,19 @@ export default {
 		},
 	},
 	props: {
-		product: Array,
-		products: Map,
+		item: Array,
 	},
 };
 </script>
 <style lang="scss" scoped>
-@import "../style/imports";
+@import "@/style/imports";
 .container {
 	@include container;
 	background-color: $secondary;
 	align-items: center;
 	overflow: auto;
+	transition: 0.5s;
+	padding: 0.5rem;
 	.product {
 		gap: 0.5rem;
 		display: flex;
@@ -97,6 +113,7 @@ export default {
 			border: 2px solid black;
 			background-color: $background;
 			.checkmark {
+				transition: 0.5s;
 				width: 100%;
 				height: 100%;
 				background-image: url("../assets/checkmark.svg");

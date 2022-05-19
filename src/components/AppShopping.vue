@@ -1,30 +1,38 @@
 <template>
 	<section>
-        <AppProduct v-for="[name, amount] in products" :product="[name, amount]" :products="products" :key="name" />
-    </section>
+		<AppProduct v-for="[name, amount] in items.list" :item="[name, amount]" :key="name" @removeItem="removeItem" />
+	</section>
 </template>
 <script>
 import AppProduct from "./AppProduct.vue";
+import { items } from "@/exports";
+
 export default {
-    data() {
-        return {
-            products: new Map(),
-        };
-    },
-    created() {
-        this.products.set("Product1", 5);
-        this.products.set("Product2", 5);
-        this.products.set("Product3", 5);
-        this.products.set("Product4", 5);
-    },
-    components: { AppProduct }
+	data() {
+		return {
+			items: items,
+		};
+	},
+	created() {
+		items.getList();
+	},
+	methods: {
+		removeItem(item) {
+			const [name] = item;
+			const object = {
+				name: name,
+			};
+			items.removeItem(object);
+		},
+	},
+	components: { AppProduct },
 };
 </script>
 <style lang="scss" scoped>
 @import "../style/imports";
 section {
-    width: 100%;
-    display: grid;
-    gap: 0.5rem;
+	width: 100%;
+	display: grid;
+	gap: 0.5rem;
 }
 </style>

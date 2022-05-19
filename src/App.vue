@@ -11,9 +11,9 @@
 import AppHeader from "./components/AppHeader.vue";
 import AppFooter from "./components/AppFooter.vue";
 import AppMain from "./components/AppMain.vue";
+import AppPassword from "./components/AppPassword.vue";
 
 import todo from "./utilities/todo";
-import AppPassword from "./components/AppPassword.vue";
 todo.on();
 
 export default {
@@ -34,7 +34,7 @@ export default {
 		},
 		state: {
 			handler: function () {
-					localStorage.setItem("state", this.state);
+				localStorage.setItem("state", this.state);
 			},
 		},
 	},
@@ -48,8 +48,8 @@ export default {
 	methods: {
 		logout() {
 			localStorage.setItem("password", null);
-			this.word = null
-		}
+			this.word = null;
+		},
 	},
 	components: { AppHeader, AppFooter, AppMain, AppPassword },
 };

@@ -42,7 +42,7 @@ class Todo {
 		}
 	}
 	/**
-	 * Get first entry in #todoList
+	 * Get last entry in #todoList
 	 */
 	last() {
 		const length = this.#todoList.length;
@@ -55,7 +55,7 @@ class Todo {
 		this.#print(object);
 	}
 	/**
-	 * Get last entry in #todoList
+	 * Get first entry in #todoList
 	 */
 	first() {
 		const index = 0;
