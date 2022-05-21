@@ -1,9 +1,10 @@
 // @ts-check
 
 /**
- * @typedef {Object} Event
- * @property {String} key
- * @property {Function} preventDefault
+ * @typedef {{
+ * key: String,
+ * preventDefault: Function,
+ * }} Event
  */
 
 /**
