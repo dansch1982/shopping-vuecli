@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: formatInput.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,31 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: formatInput.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// @ts-check
+/**
+ * Removes leading, trailing and double spaces in string.
+ * @param {String} string - String from HTML input value.
+ * @returns {String} - Lowercase string with leading, trailing and double spaces removed.
+ */
+function formatInput(string) {
+	return string
+		.toLowerCase()
+		.replace(/\s{2,}/g, " ")
+		.trim();
+}
+export default formatInput;
+</code></pre>
+        </article>
+    </section>
 
 
 

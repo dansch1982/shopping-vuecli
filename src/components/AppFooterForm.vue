@@ -1,11 +1,11 @@
 <template>
 	<section>
 		<section class="inputs">
-			<input type="text" placeholder="Item name" @keypress.enter="submit" @keypress="cleanInput($event)" v-model="name" ref="name" desc="name" />
-			<input type="number" min="1" @keypress.enter="submit" v-model="amount" ref="amount" desc="amount" />
+			<input type="text" placeholder="Item name" @keypress.enter="submit" @keypress="cleanInput($event)" v-model="name" ref="name" />
+			<input type="number" min="1" @keypress.enter="submit" v-model="amount" ref="amount" />
 		</section>
 		<section class="buttons">
-			<button @click="submit">Add</button>
+			<button @click="add">Add</button>
 		</section>
 	</section>
 </template>
@@ -24,15 +24,18 @@ export default {
 		this.reset();
 	},
 	methods: {
-		submit() {
+		add() {
 			const { name, amount } = this.$data;
-			const refs = Object.values(this.$refs);
-			for (const ref of refs) {
-				if (!ref.value) {
-					ref.focus();
-					return console.log(ref.getAttribute("desc"), "is missing.");
+
+			const refs = this.$refs;
+			for (const ref in refs) {
+				const element = refs[ref];
+				if (element !== null && element.tagName === "INPUT" && !element.value) {
+					element.focus();
+					return console.log(ref, "is missing.");
 				}
 			}
+
 			const object = {
 				name: formatInput(name),
 				amount: parseInt(amount),

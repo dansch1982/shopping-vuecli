@@ -1,8 +1,8 @@
 <template>
 	<footer>
 		<section>
-			<AppFooterForm v-if="this.showAdd" />
-			<button v-if="state==='shopping'" @click="toggleShowAdd" class="cartButton">
+			<AppFooterForm v-if="this.showAdd && state === 'shopping'" />
+			<button v-if="state === 'shopping'" @click="toggleShowAdd" class="cartButton">
 				<AssetCart />
 			</button>
 		</section>
@@ -18,7 +18,13 @@ export default {
 			showAdd: false,
 		};
 	},
-	name: "AppFooter",
+	watch: {
+		state: {
+			handler: function () {
+				this.showAdd = false;
+			},
+		},
+	},
 	methods: {
 		toggleShowAdd() {
 			this.showAdd = !this.showAdd;

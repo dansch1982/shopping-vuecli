@@ -13,7 +13,7 @@ import AppFooter from "./components/AppFooter.vue";
 import AppMain from "./components/AppMain.vue";
 import AppPassword from "./components/AppPassword.vue";
 
-import todo from "./utilities/todo";
+import todo from "./utilities/todo/todo";
 todo.on();
 
 export default {

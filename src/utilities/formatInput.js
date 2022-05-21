@@ -1,11 +1,11 @@
 // @ts-check
 /**
  * Removes leading, trailing and double spaces in string.
- * @param {String} input - String from HTML input value.
+ * @param {String} string - String from HTML input value.
  * @returns {String} - Lowercase string with leading, trailing and double spaces removed.
  */
-function formatInput(input) {
-	return input
+function formatInput(string) {
+	return string
 		.toLowerCase()
 		.replace(/\s{2,}/g, " ")
 		.trim();

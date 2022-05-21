@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: cleanInput.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,41 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: cleanInput.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// @ts-check
 
+/**
+ * @typedef {Object} Event
+ * @property {String} key
+ * @property {Function} preventDefault
+ */
 
-    <h3> </h3>
+/**
+ * Calls event.preventDefault() if event.key is not acceptable letter.
+ * @param {Event} event
+ * @returns {Boolean}
+ */
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+function cleanInput(event) {
+	if (event.key.match("^[a-zA-Z0-9åäöÅÄÖ ]*$")) {
+		return true;
+	} else {
+		event.preventDefault();
+		return false;
+	}
+}
+export default cleanInput;
+</code></pre>
+        </article>
+    </section>
 
 
 

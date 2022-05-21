@@ -13,7 +13,7 @@
 		</article>
 	</section>
 
-	<!-- <section v-else class="container">
+	<section v-else class="container">
 		<article class="inputs">
 			<input type="text" v-model="name" @keypress.enter="update" @keypress="cleanInput($event)" ref="name" />
 			<input type="number" min="1" v-model="amount" @keydown.enter="update" ref="amount" />
@@ -21,15 +21,17 @@
 
 		<article class="buttons">
 			<button class="button" @click="update">
-				<img src="./images/ok.svg" alt="" />
+				<img src="@/assets/ok.svg" alt="" />
 			</button>
 			<button class="button" @click="toggleEdit">
-				<img src="./images/cancel.svg" alt="" />
+				<img src="@/assets/cancel.svg" alt="" />
 			</button>
 		</article>
-	</section> -->
+	</section>
 </template>
 <script>
+import { items, cleanInput, formatInput } from "@/exports";
+
 export default {
 	data() {
 		return {
@@ -37,6 +39,7 @@ export default {
 			removing: false,
 			name: "",
 			amount: 0,
+			cleanInput: cleanInput,
 		};
 	},
 	beforeMount() {
@@ -44,6 +47,7 @@ export default {
 	},
 	methods: {
 		remove() {
+			this.removing = true;
 			const container = this.$refs.container;
 			const checkmark = this.$refs.checkmark;
 			checkmark.classList.remove("opacity-0", "scale-0");
@@ -54,12 +58,39 @@ export default {
 					container.classList.add("opacity-0");
 					container.addEventListener("transitionend", (event) => {
 						if (event.target === container) {
-							this.$emit("removeItem", this.item)
+							this.$emit("removeItem", this.item);
 						}
 					});
 				},
 				{ once: true }
 			);
+		},
+		update() {
+			const [oldName, oldAmount] = this.item;
+			const { name, amount } = this.$data;
+
+			if (name === oldName && amount === oldAmount) {
+				return this.toggleEdit();
+			}
+
+			const refs = this.$refs;
+			for (const ref in refs) {
+				const element = refs[ref];
+				if (element !== null && element.tagName === "INPUT" && !element.value) {
+					element.focus();
+					return console.log(ref, "is missing.");
+				}
+			}
+
+			const object = {
+				name: formatInput(name),
+				amount: parseInt(amount),
+				oldName: oldName,
+			};
+
+			items.addItem(object, () => {
+				this.toggleEdit();
+			});
 		},
 		reset() {
 			const [name, amount] = this.item;
@@ -69,6 +100,11 @@ export default {
 		toggleEdit() {
 			if (!this.removing) {
 				this.edit = !this.edit;
+				if (this.edit) {
+					this.$nextTick(() => {
+						this.$refs.name.focus();
+					});
+				}
 				this.reset();
 			}
 		},
@@ -121,6 +157,28 @@ export default {
 				background-position: center;
 				background-repeat: no-repeat;
 			}
+		}
+	}
+	.inputs {
+		white-space: nowrap;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+		width: 100%;
+		height: 100%;
+		input {
+			@include input;
+			padding: 0 1rem;
+			height: 100%;
+		}
+		input[type="text"] {
+			width: 80%;
+		}
+		input[type="number"] {
+			text-align: center;
+			width: 20%;
 		}
 	}
 	.buttons {

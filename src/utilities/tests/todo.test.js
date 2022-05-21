@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import todo from "../todo";
+import todo from "../todo/todo";
 
 describe("Testing TODO", () => {
 	let func = () => {};
@@ -34,38 +34,38 @@ describe("Testing TODO", () => {
 		expect(todo.length).toEqual(0);
 	});
 
-	it("Try to set debug to ON using on method.", () => {
+	it("Try to set debug to ON using on method", () => {
 		todo.on();
 		expect(todo.debug).toBe(true);
 	});
 
-	it("Try to set debug to OFF using off method.", () => {
+	it("Try to set debug to OFF using off method", () => {
 		todo.on();
 		todo.off();
 		expect(todo.debug).toBe(false);
 	});
 
-	it("Try to toggle debug using toggle method.", () => {
+	it("Try to toggle debug using toggle method", () => {
 		todo.toggle();
 		expect(todo.debug).toBe(true);
 		todo.toggle();
 		expect(todo.debug).toBe(false);
 	});
 
-	it("Try to log something with debug when turned ON.", () => {
+	it("Try to log something with debug when turned ON", () => {
 		todo.on();
 		console.log = jest.fn();
 		todo.add("test");
 		expect(console.log).toHaveBeenCalled();
 	});
 
-	it("Try to log something with debug when turned OFF.", () => {
+	it("Try to log something with debug when turned OFF", () => {
 		console.log = jest.fn();
 		todo.add("test");
 		expect(console.log).not.toHaveBeenCalled();
 	});
 
-	it("Try and fail to change TODO property debug.", () => {
+	it("Try and fail to change TODO property debug", () => {
 		expect(() => {
 			todo.debug = true;
 		}).toThrow(Error);
