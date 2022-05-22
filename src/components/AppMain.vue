@@ -2,7 +2,7 @@
 	<main>
 		<AppWeather v-if="state === 'weather'" />
 		<AppShopping v-if="state === 'shopping'" />
-		<section v-else-if="state === 'messages'">Messages</section>
+		<AppMessages  v-else-if="state === 'messages'" />
 		<AppHome v-else-if="state === 'home'" v-model="state" />
 	</main>
 </template>
@@ -10,6 +10,7 @@
 import AppWeather from "./AppWeather.vue";
 import AppHome from "./AppHome.vue";
 import AppShopping from "./AppShopping.vue";
+import AppMessages from "./AppMessages.vue";
 export default {
 	computed: {
 		state: {
@@ -29,7 +30,7 @@ export default {
 			console.log(value);
 		},
 	},
-	components: { AppWeather, AppHome, AppShopping },
+	components: { AppWeather, AppHome, AppShopping, AppMessages },
 };
 </script>
 <style lang="scss" scoped>

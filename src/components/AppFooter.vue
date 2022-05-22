@@ -1,17 +1,26 @@
 <template>
 	<footer>
-		<section>
-			<AppFooterForm v-if="this.showAdd && state === 'shopping'" />
-			<button v-if="state === 'shopping'" @click="toggleShowAdd" class="cartButton">
-				<AssetCart />
+		<section v-if="state === 'shopping'">
+			<AppShoppingForm v-if="this.showAdd" />
+			<button @click="toggleShowAdd" class="icon">
+				<AssetCart class="shoppingIcon" />
 			</button>
 		</section>
+		<section v-else-if="state === 'messages'">
+			<AppMessageForm v-if="this.showAdd" />
+			<button @click="toggleShowAdd" class="icon">
+				<AssetMessage class="messageIcon" />
+			</button>
+		</section>
+		<section v-else></section>
 	</footer>
 </template>
 
 <script>
 import AssetCart from "./assets/AssetCart.vue";
-import AppFooterForm from "./AppFooterForm.vue";
+import AppShoppingForm from "./AppShoppingForm.vue";
+import AssetMessage from "./assets/AssetMessage.vue";
+import AppMessageForm from "./AppMessageForm.vue";
 export default {
 	data() {
 		return {
@@ -33,7 +42,7 @@ export default {
 	props: {
 		state: String,
 	},
-	components: { AssetCart, AppFooterForm },
+	components: { AssetCart, AppShoppingForm, AssetMessage, AppMessageForm },
 };
 </script>
 
@@ -49,7 +58,7 @@ footer {
 		justify-content: center;
 		align-items: center;
 		gap: 1rem;
-		.cartButton {
+		.icon {
 			position: relative;
 			width: 4rem;
 			height: 4rem;
@@ -61,14 +70,19 @@ footer {
 				cursor: pointer;
 			}
 			svg {
+				fill: $primary;
+				stroke: $primary;
+				width: 100%;
+				height: 100%;
+			}
+			.messageIcon {
+				transform: scale(0.7, 0.7);
+			}
+			.shoppingIcon {
 				position: absolute;
 				top: 4%;
 				left: -6%;
-				width: 100%;
-				height: 100%;
 				transform: scale(0.7, 0.7);
-				fill: $primary;
-				stroke: $primary;
 			}
 		}
 	}

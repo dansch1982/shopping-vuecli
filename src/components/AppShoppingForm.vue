@@ -1,8 +1,8 @@
 <template>
 	<section>
 		<section class="inputs">
-			<input type="text" placeholder="Item name" @keypress.enter="submit" @keypress="cleanInput($event)" v-model="name" ref="name" />
-			<input type="number" min="1" @keypress.enter="submit" v-model="amount" ref="amount" />
+			<input type="text" placeholder="Item name" @keypress.enter="add" @keypress="cleanInput($event)" v-model="name" ref="name" />
+			<input type="number" min="1" @keypress.enter="add" v-model="amount" ref="amount" />
 		</section>
 		<section class="buttons">
 			<button @click="add">Add</button>

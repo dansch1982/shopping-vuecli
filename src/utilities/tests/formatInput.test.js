@@ -31,9 +31,17 @@ describe("Testing formatInput", () => {
         const string = "   these         are  some words                   "
 		expect(formatInput(string)).toBe("these are some words");
 	});
-
+    
     it("Expect UPPERCASE letter to be converted to lowercase", () => {
         const string = "TEST"
 		expect(formatInput(string)).toBe("test");
 	});
+    
+    it("Empty string should return empty string", () => {
+        expect(formatInput("")).toBe("");
+    })
+    
+    it("null should return empty string", () => {
+        expect(formatInput(null)).toBe("");
+    })
 })
