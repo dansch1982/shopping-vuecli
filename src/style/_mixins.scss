@@ -10,6 +10,7 @@
 	color: $background;
 	background-color: $cta;
 	transition: 0.2s;
+	filter: drop-shadow(2px 2px 3px black);
 	&:hover {
 		cursor: pointer;
 		background-color: darken($cta, 5%);

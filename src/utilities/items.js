@@ -3,8 +3,8 @@ import { reactive } from "vue";
 const items = reactive({
 	list: new Map(),
 	baseURL: "http://localhost:1234/",
-	getList() {
-		const url = new URL("getList", this.baseURL);
+	getItems() {
+		const url = new URL("getItems", this.baseURL);
 		fetch(url).then((response) => {
 			if (response.status === 200) {
 				response.json().then((items) => {

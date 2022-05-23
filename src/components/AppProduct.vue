@@ -123,6 +123,7 @@ export default {
 	overflow: auto;
 	transition: 0.5s;
 	padding: 0.5rem;
+	filter: drop-shadow(3px 3px 3px black);
 	.product {
 		gap: 0.5rem;
 		display: flex;

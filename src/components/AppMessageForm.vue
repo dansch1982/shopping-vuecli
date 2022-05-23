@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { messages, formatInput } from "@/exports";
+import { messages } from "@/exports";
 
 export default {
 	data() {
@@ -32,11 +32,7 @@ export default {
 					return console.log(ref, "is missing.");
 				}
 			}
-			const message = {
-				date: new Date(),
-				message: formatInput(this.message),
-			};
-			messages.add(message);
+			messages.send(this.message.trim());
 			this.reset();
 		},
 		reset() {

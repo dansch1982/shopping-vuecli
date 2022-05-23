@@ -14,7 +14,7 @@ export default {
 		};
 	},
 	created() {
-		items.getList();
+		items.getItems();
 	},
 	methods: {
 		removeItem(item) {
@@ -33,6 +33,6 @@ export default {
 section {
 	width: 100%;
 	display: grid;
-	gap: 0.5rem;
+	gap: 1rem;
 }
 </style>

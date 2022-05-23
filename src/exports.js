@@ -8,8 +8,11 @@ socket.addEventListener("message", (message) => {
 	const key = JSON.parse(message.data);
 	console.log(key);
 	switch (key) {
-		case "getList":
-			items.getList();
+		case "getItems":
+			items.getItems();
+			break;
+		case "getMessages":
+			messages.getMessages();
 			break;
 		default:
 			break;

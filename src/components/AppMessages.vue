@@ -1,8 +1,8 @@
 <template>
 	<section class="messages" ref="messages">
-		<section v-for="{id, date, message} in messages.messages" :key="id" class="container">
+		<section v-for="{ id, date, message } in messages.messages" :key="id" class="container">
 			<section class="message">
-				<h2>{{ date.toLocaleDateString("se-SV", { day: "2-digit", weekday: "long", month: "long" }) }} <span class="close" @click="remove(id)">✖</span></h2>
+				<h2>{{ new Date(date).toLocaleDateString("se-SV", { day: "2-digit", weekday: "long", month: "long" }) }} <span class="close" @click="remove(id)">✖</span></h2>
 				<article>
 					{{ message }}
 				</article>
@@ -18,6 +18,9 @@ export default {
 		return {
 			messages: messages,
 		};
+	},
+	created() {
+		messages.getMessages();
 	},
 	watch: {
 		messages: {
@@ -38,9 +41,9 @@ export default {
 			const parent = messages.parentElement;
 			parent.scrollTo(0, parent.scrollHeight);
 		},
-		remove(index) {
-			console.log(index)
-		}
+		remove(id) {
+			messages.remove(id);
+		},
 	},
 };
 </script>
@@ -69,11 +72,14 @@ export default {
 			color: black;
 			padding: 1rem;
 			border-radius: 0.5rem;
+			filter: drop-shadow(3px 3px 3px black);
+
 			h2 {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
 				font-size: 1.5rem;
+				text-transform: capitalize;
 				gap: 1rem;
 				white-space: nowrap;
 				.close {
