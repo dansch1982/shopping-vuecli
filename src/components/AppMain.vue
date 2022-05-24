@@ -2,7 +2,7 @@
 	<main>
 		<AppWeather v-if="state === 'weather'" />
 		<AppShopping v-if="state === 'shopping'" />
-		<AppMessages  v-else-if="state === 'messages'" />
+		<AppMessages v-else-if="state === 'messages'" />
 		<AppHome v-else-if="state === 'home'" v-model="state" />
 	</main>
 </template>
@@ -25,11 +25,7 @@ export default {
 	props: {
 		modelValue: String,
 	},
-	methods: {
-		update(value) {
-			console.log(value);
-		},
-	},
+	methods: {},
 	components: { AppWeather, AppHome, AppShopping, AppMessages },
 };
 </script>

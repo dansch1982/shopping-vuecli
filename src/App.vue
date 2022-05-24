@@ -22,7 +22,7 @@ export default {
 		const word = localStorage.getItem("password");
 		this.word = word;
 		const state = localStorage.getItem("state");
-		this.state = state;
+		this.state = state || "home";
 	},
 	watch: {
 		word: {

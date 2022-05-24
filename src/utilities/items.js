@@ -2,7 +2,8 @@ import { reactive } from "vue";
 
 const items = reactive({
 	list: new Map(),
-	baseURL: "http://localhost:1234/",
+	//baseURL: "http://localhost:1234/",
+	baseURL: location.origin,
 	getItems() {
 		const url = new URL("getItems", this.baseURL);
 		fetch(url).then((response) => {

@@ -1,7 +1,8 @@
 import { reactive } from "vue";
 
 const messages = reactive({
-	baseURL: "http://localhost:1234/",
+	//baseURL: "http://localhost:1234/",
+	baseURL: location.origin,
 	messages: [],
 	getMessages() {
 		const url = new URL("getMessages", this.baseURL);
