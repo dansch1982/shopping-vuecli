@@ -99,6 +99,9 @@ class Todo {
 			this.#print(object);
 		}
 	}
+	/**
+	 * Iterate through todos
+	 */
 	next() {
 		const { from, what } = this.#todoList[this.#iterator]
 			? this.#todoList[this.#iterator++]

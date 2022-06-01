@@ -10,12 +10,6 @@ socket.addEventListener("close", function clear() {
 	clearTimeout(this.pingTimeout);
 });
 
-/* socket.on("open", heartbeat);
-socket.on("ping", heartbeat);
-socket.on("close", function clear() {
-	clearTimeout(this.pingTimeout);
-}); */
-
 function heartbeat() {
 	clearTimeout(this.pingTimeout);
 
