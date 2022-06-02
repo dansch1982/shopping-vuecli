@@ -43,7 +43,7 @@ describe("Testing cleanInput", () => {
 		expect(event.preventDefault).not.toHaveBeenCalled();
 	});
 
-	it("Should call event.preventDefault if event.key is an acceptable letter", () => {
+	it("Should call event.preventDefault if event.key is not an acceptable letter", () => {
 		const letters = "hello!";
 		for (let i = 0; i < letters.length; i++) {
 			const letter = letters[i];
